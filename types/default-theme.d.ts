@@ -122,6 +122,7 @@ export namespace DefaultTheme {
 
   export interface SidebarGroup {
     text?: string
+    basePath?: string
     items: SidebarItem[]
 
     /**
@@ -141,7 +142,7 @@ export namespace DefaultTheme {
 
   export type SidebarItem =
     | { text: string; link: string }
-    | { text: string; link?: string; items: SidebarItem[] }
+    | { text: string; basePath?: string; link?: string; items: SidebarItem[] }
 
   // edit link -----------------------------------------------------------------
 

@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { withBase } from 'vitepress'
-import { EXTERNAL_URL_RE } from '../../shared'
+import { DefaultTheme, EXTERNAL_URL_RE } from '../../shared'
 
 export const HASH_RE = /#.*$/
 export const EXT_RE = /(index)?\.(md|html)$/
@@ -63,6 +63,19 @@ export function isActive(
 
 export function ensureStartingSlash(path: string): string {
   return /^\//.test(path) ? path : `/${path}`
+}
+
+export function addBasePath(
+  side: DefaultTheme.SidebarGroup
+): DefaultTheme.SidebarGroup {
+  if (side.basePath && side.basePath.length > 0) {
+    side.items.forEach((item) => {
+      if (item.link) {
+        item.link = side.basePath + item.link
+      }
+    })
+  }
+  return side
 }
 
 export function normalize(path: string): string {

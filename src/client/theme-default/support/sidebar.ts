@@ -1,5 +1,5 @@
 import type { DefaultTheme } from 'vitepress/theme'
-import { ensureStartingSlash } from './utils'
+import { addBasePath, ensureStartingSlash } from './utils'
 
 /**
  * Get the `Sidebar` from sidebar option. This method will ensure to get correct
@@ -12,7 +12,10 @@ export function getSidebar(
   path: string
 ): DefaultTheme.SidebarGroup[] {
   if (Array.isArray(sidebar)) {
-    return sidebar
+    const mainSidebar: DefaultTheme.SidebarGroup[] = sidebar.map((side) => {
+      return addBasePath(side)
+    })
+    return mainSidebar
   }
 
   path = ensureStartingSlash(path)
